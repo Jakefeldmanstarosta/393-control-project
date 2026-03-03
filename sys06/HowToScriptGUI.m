@@ -7,6 +7,8 @@ hfig = gcf;
 % Get the handles structure
 handles = guidata(hfig);
 event = struct('Source', handles, 'EventName', 'ButtonPushed' );
+
+
 %================Start Editing=============================================
 % --- Week 7(a): run same input N times and save each run ---
 load_system('stateSpace');   
@@ -40,6 +42,8 @@ else
     end
 end
 disp('Done saving runs. Files created.');
+
+
 % ===== LOAD DATA AND AVERAGE =====
 disp('Loading runs and averaging...')
 % Load first run to get structure
@@ -77,6 +81,8 @@ title('Noise histogram');
 grid on;
 disp('Mean noise value:')
 disp(mean(noise))
+
+
 % ===== Filtering =====
 % compute sampling frequency
 dt = t(2) - t(1);   
@@ -109,6 +115,7 @@ plot(t, y_low, 'DisplayName','Low-pass filtered');
 legend;
 grid on;
 title('Low-pass filter result');
+
 
 % ===== Bode Plot =====
 
