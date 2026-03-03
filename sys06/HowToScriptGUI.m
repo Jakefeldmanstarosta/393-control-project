@@ -118,7 +118,18 @@ title('Low-pass filter result');
 
 
 % ===== Bode Plot =====
-
+for w = lowpass(-4,4,50)
+   endTime = sprintf(10);
+   sizeStep = sprintf(0.01);
+   set(handles.axisEnd,   'String', 'endTime');
+   set(handles.stepSize,  'String', 'sizeStep');
+   % Run the black box
+   feval(get(handles.run,'Callback'), handles, event);
+   % Save output
+   saveName = sprintf('%s_%02d', baseSave, i);  
+   set(handles.saveFile, 'String', saveName);
+   feval(get(handles.save,'Callback'), handles, event);
+end
 
 %=======================Do Not Edit========================================
 set(0,'showHiddenHandles',temp);
