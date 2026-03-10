@@ -1,3 +1,5 @@
+%requires Signal Processing Toolbox
+
 %================Do Not Edit===============================================
 temp = get(0,'showHiddenHandles');
 set(0,'showHiddenHandles','on');
@@ -6,51 +8,46 @@ handles = guidata(hfig);
 event = struct('Source', handles, 'EventName', 'ButtonPushed' );
 %================Start Editing=============================================
 
-% Low-pass filter cutoff
-low_cutoff = 1;  % Hz (adjust if needed)
+% Load model + set a simple input
+load_system('stateSpace');
 
-% Find all bodeRun files
-files = dir('bodeRun_*.mat');
+set(handles.radioField, 'Value', 1);          % Field (equation in t)
+name = 'sin(t)';
+set(handles.input, 'String', name);
+feval(get(handles.input,'Callback'), handles, event);
 
-for k = 1:length(files)
-    filename = files(k).name;
-    
-    % Load the run
-    S = load(filename);
-    varname = filename(1:end-4); % remove '.mat'
-    data = S.(varname);
-    
-    t = data.output.time;
-    y = data.output.signal;
-    
-    % Compute sampling frequency
-    dt = t(2) - t(1);
-    Fs = 1/dt;
-    
-    % Apply low-pass filter
-    y_low = lowpass(y, low_cutoff, Fs);
-    
-    % Compute RMSE
-    rmse_low = sqrt(mean((y - y_low).^2));
-    fprintf('%s | RMSE Low-Pass: %.4e\n', filename, rmse_low);
-    
-    % Save filtered signal
-    filteredFile = sprintf('%s_lowpass.mat', varname);
-    filtered_data.time = t;
-    filtered_data.original = y;
-    filtered_data.low = y_low;
-    save(filteredFile, 'filtered_data');
-    
-    % Optional: plot (comment out for speed)
-    % figure;
-    % plot(t, y, 'DisplayName','Original'); hold on;
-    % plot(t, y_low, 'DisplayName','Low-pass filtered');
-    % legend; grid on; title(sprintf('%s Filtered', varname));
-end
+set(handles.axisStart, 'String', '0');
+set(handles.axisEnd,   'String', '10');
+set(handles.stepSize,  'String', '0.01');
+set(handles.refineOutput, 'String', '1');
 
-disp('Low-pass filtering complete for all runs.');
+% Run ONCE
+feval(get(handles.run,'Callback'), handles, event);
 
+% Save ONCE to a temp file using the app's own save mechanism
+tmp = 'tmp_filter_run';
+set(handles.saveFile, 'String', tmp);
+feval(get(handles.save,'Callback'), handles, event);
 
+% Load the saved struct (your files store a variable with the same name)
+S = load([tmp '.mat']);
+runData = S.(tmp);
 
-%=======================Do Not Edit========================================
-set(0,'showHiddenHandles',temp);
+t = runData.output.time;
+y = runData.output.signal;
+
+% ===== Low-pass filtering only =====
+dt = t(2) - t(1);
+Fs = 1/dt;
+
+low_cutoff = 0.1;          % Hz (tune as needed)
+y_low = lowpass(y, low_cutoff, Fs);
+
+% Plot ONLY the filtered signal
+figure;
+plot(t, y_low);
+title('Low-Pass Filtered Output');
+grid on;
+
+% Optional cleanup:
+% delete([tmp '.mat']);
