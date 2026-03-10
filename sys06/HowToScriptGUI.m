@@ -1,53 +1,65 @@
 % How to Use the GUI with a Script
 %================Do Not Edit===============================================
-% Find handle to hidden figure
 temp = get(0,'showHiddenHandles');
 set(0,'showHiddenHandles','on');
 hfig = gcf;
-% Get the handles structure
 handles = guidata(hfig);
 event = struct('Source', handles, 'EventName', 'ButtonPushed' );
-
 %================Start Editing=============================================
 
-% This will let you pick the Field radio button
+load_system('stateSpace');
+
+% 1) Choose input type: Field (equation in t)
 set(handles.radioField, 'Value', 1);
 
-% You need to use a string for the equation you want
-name = '10 + t^2';
-% Or if you have a variable you can use sprintf which is like the
-% printf function in c programming
-k = 10;
-name = sprintf('%d*t^2',k);
-set(handles.input, 'String', name );
-
-% This invokes the input Callback. Call this every time you change the
-% contents of the field textbox to update 'inputFunc.m'
-feval(get(handles.input,'Callback'),handles, event);
-
-
-% % This will let you pick the File radio button
-% set(handles.radioFile, 'Value', 1);
-% % This changes the input file name textbox
-% set(handles.inputFile, 'String', 'inputManual' );
-
-% This changes the start time
+% 2) Simulation settings (fixed parameters)
 set(handles.axisStart, 'String', '0');
-% This changes the end time
-set(handles.axisEnd, 'String', '10');
-% This changes the step size
-set(handles.stepSize, 'String', '0.01');
-% This changes the refine output
+set(handles.stepSize,  'String', '0.01');
 set(handles.refineOutput, 'String', '1');
 
-% Use the run button
-feval(get(handles.run,'Callback'),handles, event);
-% This changes the save file name
-set(handles.saveFile, 'String', 'saving_file_name' );
-% Use the save button
-feval(get(handles.save,'Callback'),handles, event);
-% Use the clear button
-% feval(get(handles.clear,'Callback'),handles, event);
+% 3) Create 50 log-spaced frequencies from 10^-4 to 10^4
+omega_vec = logspace(-4, 4, 50);
+
+% Reverse the vector to start from highest frequency
+omega_vec = fliplr(omega_vec);
+
+baseSave = 'bodeRun';
+
+disp('Starting frequency sweep...')
+
+for k = 1:length(omega_vec)
+
+    % TEMPORARY LIMIT: stop after 30 runs
+    if k > 30
+        disp('Temporary limit reached: stopping after 30 runs.');
+        break;
+    end
+
+    omega = omega_vec(k);
+
+    % Define sine input at this frequency
+    name = sprintf('sin(%f*t)', omega);
+    set(handles.input, 'String', name);
+    feval(get(handles.input,'Callback'), handles, event);
+
+    % Adjust simulation time:
+    % Ensure several cycles for low frequencies
+    simEnd = max(10, 20/omega);
+    set(handles.axisEnd, 'String', num2str(simEnd));
+
+    % Run the black box
+    feval(get(handles.run,'Callback'), handles, event);
+
+    % Save output
+    saveName = sprintf('%s_%02d', baseSave, k);
+    set(handles.saveFile, 'String', saveName);
+    feval(get(handles.save,'Callback'), handles, event);
+
+    fprintf('Saved run %02d | ω = %.4e rad/s\n', k, omega);
+
+end
+
+disp('Frequency sweep complete. Files created (limited to 30).');
 
 %=======================Do Not Edit========================================
 set(0,'showHiddenHandles',temp);
