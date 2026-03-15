@@ -1,3 +1,3 @@
 function [ f ] = inputFunc( t )
-	f = sin(t);
+	f = sin(10000*t);
 end
