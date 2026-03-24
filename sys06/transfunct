@@ -1,0 +1,47 @@
+z = [1 10];
+p = [10^-2.9 10^2.03 10^2.1 10^2.1];
+
+z1=1;
+z2 = 10;
+p1 = 10^-2.9;
+p2 = 10^2.03;
+p3 = 10^2.1;
+
+k = 10^(4-((z1*z2)/p1*p2*p3)/20);
+
+
+load('max_vals.mat')
+ 
+N = length(max_vals);
+w = logspace(-4,4,N);
+ 
+mag_exp = 20*log10(max_vals);
+ 
+% Theoretical system
+z = [1 10];
+p = [10^-2.9 10^2.03 10^2.1 10^2.1];
+
+z1=1;
+z2 = 10;
+p1 = 10^-2.9;
+p2 = 10^2.03;
+p3 = 10^2.1;
+
+k = 10^(4-((z1*z2)/p1*p2*p3)/20);
+sys = zpk([0.1 10], [0.005 107.15 125.89 125.89], 13457);
+ 
+[mag_theory, phase_theory, wout] = bode(sys, w);
+mag_theory = squeeze(mag_theory);
+mag_theory_dB = 20*log10(mag_theory);
+ 
+% Plot both
+figure
+semilogx(w, mag_exp, 'o', 'LineWidth', 1.5)
+hold on
+semilogx(wout, mag_theory_dB, 'LineWidth', 2)
+ 
+grid on
+xlabel('Frequency (rad/s)')
+ylabel('Magnitude (dB)')
+title('Bode Magnitude Plot')
+legend('Experimental', 'Theoretical')
