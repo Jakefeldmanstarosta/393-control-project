@@ -59,7 +59,7 @@ __MWOPC_PART_BEGIN__ /metadata/mwcoreProperties.xml
 __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesExtension.xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <mwcoreProperties xmlns="http://schemas.mathworks.com/package/2014/corePropertiesExtension">
-  <uuid>146e1519-ef32-4366-b737-1c2304fa3b79</uuid>
+  <uuid>2adeea18-2285-4c35-8adc-702114f27864</uuid>
 </mwcoreProperties>
 
 __MWOPC_PART_BEGIN__ /metadata/mwcorePropertiesReleaseInfo.xml
@@ -110,7 +110,7 @@ __MWOPC_PART_BEGIN__ /simulink/blockdiagram.xml
 <?xml version="1.0" encoding="utf-8"?>
 <ModelInformation Version="1.0">
   <Model>
-    <P Name="ModelUUID">b77660dd-c933-42d9-9bcc-fa0cf5a8d0e3</P>
+    <P Name="ModelUUID">9179031e-e239-4590-89de-26a5a63f3c7d</P>
     <P Name="LastSavedArchitecture">win64</P>
     <ConfigManagerSettings>
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
@@ -158,7 +158,7 @@ __MWOPC_PART_BEGIN__ /simulink/configSet0.xml
         <P Name="Description"/>
         <P Name="Components" Class="double">[]</P>
         <P Name="StartTime">0</P>
-        <P Name="StopTime">10</P>
+        <P Name="StopTime">3.141600e-03</P>
         <P Name="AbsTol">auto</P>
         <P Name="AutoScaleAbsTol">on</P>
         <P Name="FixedStep">auto</P>
@@ -169,7 +169,7 @@ __MWOPC_PART_BEGIN__ /simulink/configSet0.xml
         <P Name="MaxConsecutiveZCs">1000</P>
         <P Name="ExtrapolationOrder">4</P>
         <P Name="NumberNewtonIterations">1</P>
-        <P Name="MaxStep">1.000000e-02</P>
+        <P Name="MaxStep">6.283200e-06</P>
         <P Name="MinStep">auto</P>
         <P Name="MaxConsecutiveMinStep">1</P>
         <P Name="RelTol">1e-3</P>
@@ -959,42 +959,109 @@ __MWOPC_PART_BEGIN__ /simulink/hdlParams.xml
 __MWOPC_PART_BEGIN__ /simulink/modelDictionary.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1" defaultPackage="slid" packageUris="http://schema.mathworks.com/mf0/slid/R2023a_20220628">
-  <System type="System" uuid="903b2212-331a-4e92-b85f-ab86d6651306">
-    <Interface type="Interface" uuid="37656baf-05c1-461c-9617-34572d90da44"/>
+  <System type="System" uuid="3d908bd9-5f7c-4e45-8e11-5e066ae76cb1">
+    <Interface type="Interface" uuid="f8be9518-5513-46e1-a951-e6c682e40e3f"/>
   </System>
 </MF0>
 __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2024b_202402211119">
-  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="20d9d8e4-4dc2-430f-8013-0c6af6729d62">
-    <defaultEventBehavior type="sltp.mm.core.EventBehavior" uuid="7a6be39d-324e-443a-9bef-f37fc6a5ac70"/>
-    <editorState type="sltp.mm.core.EditorState" uuid="a44a10d3-f578-47c5-ab11-f7d380f2d33c">
-      <panelState type="sltp.mm.core.EditorPanelState" uuid="cbbdc7e3-de45-4b3e-94d5-564c8dc3c5ce"/>
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="07510c58-4c42-47cc-9522-c5e7791102cb">
+    <globalData type="sltp.mm.core.GlobalData" uuid="2b477e0a-cef8-483f-8a32-431b53e11811">
+      <dataName>portIn1</dataName>
+      <type>RootInport</type>
+    </globalData>
+    <globalData type="sltp.mm.core.GlobalData" uuid="6fa5ad78-3131-475e-b476-2da16906832d">
+      <dataName>portOut1</dataName>
+      <type>RootOutport</type>
+    </globalData>
+    <priorityDirection>HighNumberLast</priorityDirection>
+    <defaultEventBehavior type="sltp.mm.core.EventBehavior" uuid="933e7b51-8453-425d-abda-ae375ce531d0"/>
+    <editorState type="sltp.mm.core.EditorState" uuid="1932cd08-5db3-4214-8bef-998ff13477a2">
+      <isSynchronized>true</isSynchronized>
+      <panelState type="sltp.mm.core.EditorPanelState" uuid="9415592f-21b3-4ff2-a401-8718808f9c8b"/>
     </editorState>
-    <rootTask type="sltp.mm.core.Task" uuid="b3a36d15-bc0d-442d-80e8-6c0bb80a8f93">
-      <context type="sltp.mm.core.Context" uuid="20d9d8e4-4dc2-430f-8013-0c6af6729d62"/>
+    <rootTask type="sltp.mm.core.Task" uuid="00ce5559-ec2a-4273-9b81-d02d362b7d9f">
+      <context type="sltp.mm.core.Context" uuid="07510c58-4c42-47cc-9522-c5e7791102cb"/>
       <explicit>false</explicit>
       <name>Default</name>
       <priority>-2147483648</priority>
-      <subgraph type="sltp.mm.core.Graph" uuid="3304ff94-1b0f-4050-a535-eda29dc41b7e"/>
+      <subgraph type="sltp.mm.core.Graph" uuid="50f0dd46-f7b3-456e-9e5b-3cb45768ac0e">
+        <tasks type="sltp.mm.core.Task" uuid="2af9a005-315c-45b6-96c5-128940201e83">
+          <baseTask>true</baseTask>
+          <context type="sltp.mm.core.Context" uuid="07510c58-4c42-47cc-9522-c5e7791102cb"/>
+          <explicit>false</explicit>
+          <id>1</id>
+          <isTimed>true</isTimed>
+          <name>Cont</name>
+          <priority>40</priority>
+          <rates type="sltp.mm.core.Rate" uuid="a4852079-0588-4b23-a362-b35b0f99e394">
+            <annotation>Cont</annotation>
+            <color>255</color>
+            <hasBlocks>true</hasBlocks>
+            <identifier>Continuous00</identifier>
+            <rateIndex>0</rateIndex>
+            <rateSpec type="sltp.mm.core.RateSpec">
+              <period>0.0</period>
+            </rateSpec>
+            <sti>0</sti>
+          </rates>
+        </tasks>
+      </subgraph>
     </rootTask>
   </sltp.mm.core.Context>
 </sltp_graph>
 __MWOPC_PART_BEGIN__ /simulink/ScheduleEditor.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_editor version="1.1" packageUris="http://schema.mathworks.com/mf0/DiagramEditor/R2019a_20181107 http://schema.mathworks.com/mf0/SltpSyntax/R2024b_202402211148">
-  <sltp.mm.syntax.Context type="sltp.mm.syntax.Context" uuid="72ef24b9-a824-43b9-b56c-0b80227c18b4">
-    <rootGraph type="sltp.mm.syntax.Graph" uuid="bffe5872-9f51-4f93-a65e-aa13e2989934">
-      <priorityDirection>HighNumberFirst</priorityDirection>
-      <title>Default</title>
-      <diagramElement type="diagram.editor.model.Diagram" uuid="b8d499b5-c9c1-48c1-917a-b10b18192ad5"/>
-    </rootGraph>
-  </sltp.mm.syntax.Context>
-  <diagram.editor.model.Diagram type="diagram.editor.model.Diagram" uuid="b8d499b5-c9c1-48c1-917a-b10b18192ad5">
-    <syntaxElement type="sltp.mm.syntax.Graph" uuid="bffe5872-9f51-4f93-a65e-aa13e2989934"/>
+  <diagram.editor.model.Diagram type="diagram.editor.model.Diagram" uuid="4636c59b-d3c6-4dad-a8bd-e04ae28c58ca">
+    <entities type="diagram.editor.model.Entity" uuid="901d2c2c-a1e5-492d-b3f1-1e83a4a91f21">
+      <position>0,0</position>
+      <size>0,0,0,0</size>
+      <syntaxElement type="sltp.mm.syntax.Node" uuid="bf84c091-58a7-461d-af5d-7f3709df8f25"/>
+      <title>Cont</title>
+      <type>base</type>
+      <subDiagram type="diagram.editor.model.Diagram" uuid="573d2f73-944a-47bd-94b1-71625f711521">
+        <position>0,0</position>
+        <syntaxElement type="sltp.mm.syntax.Graph" uuid="acf89c23-3fe3-44ff-a6d6-a9fe6ed64cc2"/>
+        <title>Cont</title>
+        <type>graph.Graph</type>
+      </subDiagram>
+    </entities>
+    <syntaxElement type="sltp.mm.syntax.Graph" uuid="d37a1906-9185-4ec5-875a-0e8560ae808b"/>
     <title>Default</title>
     <type>graph.Graph</type>
   </diagram.editor.model.Diagram>
+  <sltp.mm.syntax.Context type="sltp.mm.syntax.Context" uuid="f3226d83-dcef-4ea3-8222-9534bc769ddb">
+    <globalData type="sltp.mm.syntax.GlobalData" uuid="022d7aa3-d448-49ac-958d-57e1089e1186">
+      <dataName>portIn1</dataName>
+      <type>RootInport</type>
+    </globalData>
+    <globalData type="sltp.mm.syntax.GlobalData" uuid="4be3fd56-f97f-4178-8f74-ac6f01a8b79d">
+      <dataName>portOut1</dataName>
+      <type>RootOutport</type>
+    </globalData>
+    <rootGraph type="sltp.mm.syntax.Graph" uuid="d37a1906-9185-4ec5-875a-0e8560ae808b">
+      <children type="sltp.mm.syntax.Node" uuid="bf84c091-58a7-461d-af5d-7f3709df8f25">
+        <priority>40</priority>
+        <rates type="sltp.mm.syntax.RateData">
+          <color>#000000</color>
+          <hasBlocks>true</hasBlocks>
+          <rate>0</rate>
+          <title>Cont</title>
+        </rates>
+        <title>Cont</title>
+        <type>base</type>
+        <diagramElement type="diagram.editor.model.Entity" uuid="901d2c2c-a1e5-492d-b3f1-1e83a4a91f21"/>
+        <subgraph type="sltp.mm.syntax.Graph" uuid="acf89c23-3fe3-44ff-a6d6-a9fe6ed64cc2">
+          <title>Cont</title>
+          <diagramElement type="diagram.editor.model.Diagram" uuid="573d2f73-944a-47bd-94b1-71625f711521"/>
+        </subgraph>
+      </children>
+      <title>Default</title>
+      <diagramElement type="diagram.editor.model.Diagram" uuid="4636c59b-d3c6-4dad-a8bd-e04ae28c58ca"/>
+    </rootGraph>
+  </sltp.mm.syntax.Context>
 </sltp_editor>
 __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
 <?xml version="1.0" encoding="utf-8"?>
